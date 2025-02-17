@@ -26,8 +26,8 @@ Make sure you have the following software installed on your machine:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-project.git
-cd your-project
+git clone https://github.com/AndySS-Maker/miracletree-tech-test
+cd miracletree-tech-test
 
 Contributing
 If you would like to contribute to this project, please follow these guidelines:
