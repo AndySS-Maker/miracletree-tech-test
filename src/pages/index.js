@@ -24,14 +24,36 @@ export default function Home({ posts }) {
       )
     : processedPosts;
 
+  function removeGlobalDuplicates(arr, keys) {
+    const seenWords = new Set();
+
+    return arr.map((obj) => {
+      const newObj = { ...obj };
+
+      keys.forEach((key) => {
+        if (Array.isArray(newObj[key])) {
+          newObj[key] = newObj[key].filter((word) => {
+            if (seenWords.has(word)) {
+              return false; 
+            }
+            seenWords.add(word);
+            return true; 
+          });
+        }
+      });
+
+      return newObj;
+    });
+  }
+
+  const postToUse = removeGlobalDuplicates(processedPosts, ["keywords"]);
+
   return (
     <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Lista de posts
-      </h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Lista de posts</h2>
 
       <div className="flex flex-wrap justify-center mb-6">
-        {processedPosts
+        {postToUse
           .flatMap((post) => post.keywords)
           .map((keyword, index) => (
             <button
